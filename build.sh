@@ -10,12 +10,16 @@ ARCHIVE_NAME="${NAME}-${GIT_SHA}.tar"
 TMP_PATH="${TMP}/${ARCHIVE_NAME}"
 
 [[ -d "${CACHE_DIR}" ]] || sudo mkdir -p "${CACHE_DIR}"
+
 echo "Building image ${NAME}..."
 buildah bud -f Containerfile -t "${NAME}" || { echo "Build failed"; exit 1; }
+
 echo "Tagging ${NAME}:latest"
 buildah tag "${NAME}" "${NAME}:latest"
+
 echo "Tagging ${NAME}:${GIT_SHA}"
 buildah tag "${NAME}" "${NAME}:${GIT_SHA}"
+
 echo "Archiving image..."
 buildah push "${NAME}:latest" "oci-archive:${TMP_PATH}" &&
     sudo cp "${TMP_PATH}" "${CACHE_DIR}/${ARCHIVE_NAME}" &&
