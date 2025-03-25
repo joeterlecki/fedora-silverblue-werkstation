@@ -2,7 +2,7 @@ variables:
   IMAGE_NAME: fedora-silverblue-werkstation
 
 stages:
-  # - linting
+  - linting
   - build
   - deploy
 
@@ -13,6 +13,7 @@ lint-containerfile:
     entrypoint: [""]
   script:
     - trivy fs --scanners misconfig .
+  when: never
 
 buildah-build:
   stage: build
