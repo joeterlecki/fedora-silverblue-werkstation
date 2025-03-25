@@ -12,5 +12,5 @@ buildah-build:
   services:
     - docker:25-dind
   script:
-    - docker buildx -f Containerfile -t ${IMAGE_NAME}:latest --output type=oci,dest=./your-image.tar  .
+    - docker buildx build -f Containerfile -t ${IMAGE_NAME}:latest --output type=oci,dest=./your-image.tar  .
 
