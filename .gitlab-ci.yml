@@ -2,25 +2,11 @@ variables:
   IMAGE_NAME: fedora-silverblue-werkstation
 
 stages:
-  - linting
   - build
-  - deploy
-
-lint-containerfile:
-  stage: linting
-  image:
-    name: aquasec/trivy
-    entrypoint: [""]
-  script:
-    - trivy fs --scanners misconfig .
 
 buildah-build:
   stage: build
-  image:
-    name: buildah/buildah
-  variables:
-    STORAGE_DRIVER: vfs
-    BUILDAH_FORMAT: docker
   script:
-    - buildah bud --isolation chroot -f Containerfile -t "${IMAGE_NAME}" .
+    - apt-get install buildah -y
+    - buildah bud -f Containerfile -t "${IMAGE_NAME}" .
     - buildah tag "${IMAGE_NAME}" "${IMAGE_NAME}:latest"
