@@ -12,5 +12,5 @@ buildah-build:
   services:
     - docker:25-dind
   script:
-    - docker build -t ${IMAGE_NAME}:latest
+    - docker build -t ${IMAGE_NAME}:latest .
 
