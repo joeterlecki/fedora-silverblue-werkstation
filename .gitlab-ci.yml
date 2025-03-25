@@ -11,6 +11,8 @@ buildah-build:
   variables:
     STORAGE_DRIVER: vfs
     BUILDAH_FORMAT: oci
+  services:
+    - docker:25-dind
   script:
     - buildah bud -f Containerfile -t "${IMAGE_NAME}" .
     - buildah tag "${IMAGE_NAME}" "${IMAGE_NAME}:latest"
