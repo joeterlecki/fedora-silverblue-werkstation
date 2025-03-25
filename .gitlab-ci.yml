@@ -15,7 +15,6 @@ buildah-build:
   stage: build
   image:
     name: buildah/buildah
-    entrypoint: [""]
   script:
     - buildah bud -f Containerfile -t fedora-silverblue-werkstation
     - buildah tag fedora-silverblue-werkstation fedora-silverblue-werkstation:latest
