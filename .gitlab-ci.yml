@@ -12,6 +12,5 @@ buildah-build:
     STORAGE_DRIVER: vfs
     BUILDAH_FORMAT: oci
   script:
-    - apt-get install buildah -y
     - buildah bud -f Containerfile -t "${IMAGE_NAME}" .
     - buildah tag "${IMAGE_NAME}" "${IMAGE_NAME}:latest"
