@@ -6,9 +6,9 @@ stages:
 
 buildah-build:
   stage: build
-  image:
-    name: buildah/buildah:latest
+  image: docker:25-cli
   variables:
+    IMAGE_NAME: fedora-silverblue-werkstation
   services:
     - docker:25-dind
   script:
