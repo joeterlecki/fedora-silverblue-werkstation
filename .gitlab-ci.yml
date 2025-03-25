@@ -13,7 +13,6 @@ lint-containerfile:
     entrypoint: [""]
   script:
     - trivy fs --scanners misconfig .
-  when: never
 
 buildah-build:
   stage: build
