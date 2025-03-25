@@ -6,6 +6,11 @@ stages:
 
 buildah-build:
   stage: build
+  image:
+    name: buildah/buildah:latest
+  variables:
+    STORAGE_DRIVER: vfs
+    BUILDAH_FORMAT: oci
   script:
     - apt-get install buildah -y
     - buildah bud -f Containerfile -t "${IMAGE_NAME}" .
