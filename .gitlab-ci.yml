@@ -25,9 +25,9 @@ build-job:       # This job runs in the build stage, which runs first.
   stage: scan
   image:
     name: aquasec/trivy
+    entrypoint [""]
   script:
-    - echo "Compiling the code..."
-    - echo "Compile complete."
+    - trivy fs --scanners misconfig .
 
 unit-test-job:   # This job runs in the test stage.
   stage: test    # It only starts when the job in the build stage completes successfully.
