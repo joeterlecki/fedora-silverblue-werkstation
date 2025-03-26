@@ -9,8 +9,11 @@ buildah-build:
   image:
     name: quay.io/buildah/stable:latest
   variables:
-    IMAGE_NAME: fedora-silverblue-werkstation
+    STORAGE_DRIVER: vfs
+    BUILDAH_FORMAT: oci
   services:
   script:
     - buildah bud -f Containerfile -t "${IMAGE_NAME}"
+    - buildah tag "${IMAGE_NAME}" "${IMAGE_NAME}:latest"
+    - buildah push "${IMAGE_NAME}:latest" oci:./current-image.tar
 
