@@ -6,11 +6,12 @@ stages:
 
 buildah-build:
   stage: build
+  image:
+    name: quay.io/buildah/stable:latest
   variables:
     BUILDAH_FORMAT: oci
   services:
   script:
-    - apt-get update && apt-get install buildah -y
     - buildah bud -f Containerfile -t "${IMAGE_NAME}"
     - buildah images
     - buildah tag "${IMAGE_NAME}" "${IMAGE_NAME}:latest"
