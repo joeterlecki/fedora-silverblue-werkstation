@@ -7,7 +7,7 @@ stages:
 buildah-build:
   stage: build
   image:
-    name: docker://quay.io/buildah/stable:latest
+    name: quay.io/buildah/stable:latest
   variables:
     IMAGE_NAME: fedora-silverblue-werkstation
   services:
