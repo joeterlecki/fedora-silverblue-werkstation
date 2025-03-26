@@ -15,4 +15,7 @@ buildah-build:
     - buildah images
     - buildah tag "${IMAGE_NAME}" "${IMAGE_NAME}:latest"
     - buildah push "${IMAGE_NAME}:latest" oci:./current-image.tar
+  artifacts:
+    paths:
+      - ./current-image.tar
 
