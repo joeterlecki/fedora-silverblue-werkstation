@@ -6,11 +6,11 @@ stages:
 
 buildah-build:
   stage: build
-  image: docker:25-cli
+  image:
+    name: docker://quay.io/buildah/stable:latest
   variables:
     IMAGE_NAME: fedora-silverblue-werkstation
   services:
-    - docker:25-dind
   script:
-    - docker buildx build -f Containerfile -t ${IMAGE_NAME}:latest --output type=oci,dest=./your-image.tar  .
+    - buildah bud -f Containerfile -t "${IMAGE_NAME}"
 
