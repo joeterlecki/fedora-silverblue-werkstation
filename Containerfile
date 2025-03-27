@@ -1,9 +1,14 @@
 FROM quay.io/fedora-ostree-desktops/sway-atomic:41
-ARG NEOVIM="https://github.com/neovim/neovim/releases/download/v0.10.4/nvim-linux-x86_64.tar.gz"
-ARG TAILSCALE="https://pkgs.tailscale.com/stable/tailscale_1.80.3_amd64.tgz"
+
+COPY ./yum.repos.d/*.repo /etc/yum.repos.d/
+
+RUN rpm-ostree override remove firefox firefox-langpacks
+
+RUN sed -i 's|^SHELL=.*|SHELL=/bin/zsh|' /etc/default/useradd
 
 RUN rpm-ostree install \
-    https://mirrors.rpmfusion.org/free/fedora/rpmfusion-free-release-41.noarch.rpm \
-    https://mirrors.rpmfusion.org/nonfree/fedora/rpmfusion-nonfree-release-41.noarch.rpm && \
+    tailscale zsh neovim && \
     rpm-ostree cleanup -m && \
     ostree container commit
+
+RUN flatpak remote-add --if-not-exists flathub https://flathub.org/repo/flathub.flatpakrepo
