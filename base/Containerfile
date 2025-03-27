@@ -6,7 +6,7 @@ RUN sed -i 's|^SHELL=.*|SHELL=/bin/zsh|' /etc/default/useradd
 
 RUN rpm-ostree override remove firefox firefox-langpacks && \
     rpm-ostree install \
-    tailscale zsh neovim qt6-qtquickcontrols2 qt6-qtsvg && \
+    tailscale zsh neovim && \
     rpm-ostree cleanup -m && \
     ostree container commit
 
