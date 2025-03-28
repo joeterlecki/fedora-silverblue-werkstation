@@ -1,12 +1,15 @@
 FROM quay.io/fedora-ostree-desktops/sway-atomic:41
 
 COPY ./yum.repos.d/*.repo /etc/yum.repos.d/
+COPY ./flatpaks.txt /var/cache/flatpak/
 
 RUN sed -i 's|^SHELL=.*|SHELL=/bin/zsh|' /etc/default/useradd
 
+RUN wget https://github.com/zellij-org/zellij/releases/download/v0.42.1/zellij-x86_64-unknown-linux-musl.tar.gz
+
 RUN rpm-ostree override remove firefox firefox-langpacks && \
     rpm-ostree install \
-    tailscale zsh neovim && \
+    tailscale zsh neovim stow && \
     rpm-ostree cleanup -m && \
     ostree container commit
 

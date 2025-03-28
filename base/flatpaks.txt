@@ -1,0 +1,4 @@
+com.vivaldi.Vivaldi
+me.proton.Mail
+me.proton.Pass
+org.wezfurlong.wezterm

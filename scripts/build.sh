@@ -2,7 +2,7 @@
 
 set -euo pipefail
 
-NAME=$(basename "$(pwd)")
+NAME="fedora-silverblue-werkstation"
 GIT_SHA=$(git rev-parse --short=8 HEAD)
 CACHE_DIR="/var/cache/image-builds"
 TMP=$(mktemp -d) || { echo "Failed to create temp directory"; exit 1; }
