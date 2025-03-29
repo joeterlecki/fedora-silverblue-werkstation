@@ -15,7 +15,8 @@ jobs:
       uses: redhat-actions/buildah-build@v2
       with:
         image: werkstation
-        tags:  v1 ${{ github.sha }}
+        tags:  v1${{ github.sha }}
+        layers: true
         oci: true
         containerfiles: |
           ./base/Containerfile
