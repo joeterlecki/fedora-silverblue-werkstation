@@ -16,6 +16,7 @@ jobs:
       with:
         image: werkstation
         tags:  v1${{ github.sha }}
+        context: ./base/
         layers: true
         oci: true
         containerfiles: |
