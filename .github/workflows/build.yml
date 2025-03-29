@@ -1,4 +1,8 @@
 ---
+name: Build Werkstation OCI
+on:
+  - push
+
 jobs:
   build:
     name: Build Images
