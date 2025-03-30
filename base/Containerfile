@@ -8,12 +8,16 @@ RUN set -ex \
     && cp /tmp/zellij/zellij /usr/bin/ \
     && rm zellij-x86_64-unknown-linux-musl.tar.gz
 
+RUN wget https://github.com/neovim/neovim/releases/download/v0.11.0/nvim-linux-x86_64.tar.gz \
+    && mkdir -p /var/opt/nvim \
+    && tar xzf nvim-linux-x86_64.tar.gz --strip-components=1 -C /var/opt/nvim \
+    && rm nvim-linux-x86_64.tar.gz
+
 COPY ./yum.repos.d/*.repo /etc/yum.repos.d/
 
 RUN rpm-ostree override remove firefox firefox-langpacks && \
     rpm-ostree install \
-    https://github.com/wezterm/wezterm/releases/download/20240203-110809-5046fc22/wezterm-20240203_110809_5046fc22-1.fedora39.x86_64.rpm \
-    tailscale alacritty neovim zsh && \
+    tailscale alacritty zsh && \
     rpm-ostree cleanup -m && \
     ostree container commit
 
