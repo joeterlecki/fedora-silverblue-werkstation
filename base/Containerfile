@@ -12,10 +12,9 @@ RUN set -ex \
     && wget -q "https://github.com/neovim/neovim/releases/download/${NVIM_LATEST}/nvim-linux-x86_64.tar.gz" \
     && mkdir -p /tmp/nvim \
     && tar -xzf nvim-linux-x86_64.tar.gz -C /tmp/nvim --strip-components=1 \
-    && cp /tmp/nvim/bin/nvim /usr/bin/ \
-    && mkdir -p /usr/local/lib/nvim && mkdir -p /usr/local/share/nvim \
-    && cp -r /tmp/nvim/lib/* /usr/local/lib/ \
-    && cp -r /tmp/share/* /usr/local/share/nvim/
+    && cp -r /tmp/nvim/bin/ /usr/bin/ \
+    && cp -r /tmp/nvim/lib/nvim /usr/lib/ \
+    && cp -r /tmp/nvim/share /usr/share/
 
 COPY ./yum.repos.d/*.repo /etc/yum.repos.d/
 
