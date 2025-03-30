@@ -23,7 +23,7 @@ jobs:
           ./base/Containerfile
 
     - name: 'Login to GitHub Container Registry'
-      uses: docker/login-action@v1
+      uses: docker/login-action@v2
       with:
         registry: ghcr.io
         username: ${{github.actor}}
@@ -33,8 +33,8 @@ jobs:
       id: push-to-quay
       uses: redhat-actions/push-to-registry@v2
       with:
-        image: ${{ steps.build-image.outputs.image }}
-        tags: ${{ steps.build-image.outputs.tags }}
+        image: werkstation
+        tags: latest
         registry: ghcr.io/${{ github.repository_owner }}
         username: ${{ github.actor }}
         password: ${{ secrets.GHCR_PASSWORD }}
