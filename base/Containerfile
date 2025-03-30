@@ -12,7 +12,7 @@ RUN set -ex \
     && wget -q "https://github.com/neovim/neovim/releases/download/${NVIM_LATEST}/nvim-linux-x86_64.tar.gz" \
     && mkdir -p /tmp/nvim \
     && tar -xzf nvim-linux-x86_64.tar.gz -C /tmp/nvim --strip-components=1 \
-    && cp -r /tmp/nvim/bin/ /usr/bin/ \
+    && cp /tmp/nvim/bin/nvim /usr/bin/nvim \
     && cp -r /tmp/nvim/lib/nvim /usr/lib/ \
     && cp -r /tmp/nvim/share /usr/share/
 
