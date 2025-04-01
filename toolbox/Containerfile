@@ -1,4 +1,8 @@
-FROM quay.io/fedora/fedora-toolbox:41
+FROM alpine AS bun
+RUN busybox wget -q https://github.com/oven-sh/bun/releases/latest/download/bun-linux-x64.zip -O /tmp/bun-linux-x64.zip
+
+
+FROM quay.io/fedora/fedora-toolbox:41 AS Release
 
 ARG NAME=toolbox
 
@@ -24,5 +28,9 @@ RUN dnf -y upgrade \
   terraform \
   dotnet-sdk-8.0 \
   golang \
-  go-task \
+  go-task \ 
+  bat \
+  lsd \
+  zoxide \
+  fzf \
   && dnf clean all
