@@ -7,6 +7,10 @@ jobs:
   build:
     name: Build Images
     runs-on: ubuntu-latest
+    on:
+      push:
+        paths:
+          - 'base/**'
 
     steps:
     - uses: actions/checkout@v4
