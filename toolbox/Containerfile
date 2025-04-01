@@ -3,13 +3,26 @@ FROM quay.io/fedora/fedora-toolbox:41
 ARG NAME=toolbox
 
 LABEL name="$NAME" \
-      summary="Fedora toolbox container" \
-      maintainer="Joe Terlecki"
+  summary="Fedora toolbox container" \
+  maintainer="Joe Terlecki"
 
 ENV EDITOR=nvim
 
-# Install packages
+COPY ./yum.repos.d/*.repo /etc/yum.repos.d/
+
+RUN wget -q https://github.com/oven-sh/bun/releases/latest/download/bun-linux-x64.zip -O /tmp/bun-linux-x64.zip \
+  && unzip /tmp/bun-linux-x64.zip -d /tmp/ \
+  && mv /tmp/bun-linux-x64/bun /usr/local/bin/ \
+  && rm -rf /tmp/bun-linux-x64*
+
 RUN dnf -y upgrade \
   && dnf -y install \
   ripgrep \
+  neovim \
+  zsh \
+  awscli \
+  terraform \
+  dotnet-sdk-8.0 \
+  golang \
+  go-task \
   && dnf clean all
