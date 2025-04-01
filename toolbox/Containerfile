@@ -1,6 +1,8 @@
-FROM alpine AS bun
-RUN busybox wget -q https://github.com/oven-sh/bun/releases/latest/download/bun-linux-x64.zip -O /tmp/bun-linux-x64.zip
 
+FROM busybox AS bun
+ARG BUN_URL="https://github.com/oven-sh/bun/releases/latest/download/bun-linux-x64.zip"
+RUN wget -q ${BUN_URL} -O ./bun-linux-x64.zip \
+  && unzip ./bun-linux-x64.zip -d ./
 
 FROM quay.io/fedora/fedora-toolbox:41 AS Release
 
@@ -12,12 +14,8 @@ LABEL name="$NAME" \
 
 ENV EDITOR=nvim
 
+COPY --from=bun /bun-linux-x64/bun /usr/local/bin
 COPY ./yum.repos.d/*.repo /etc/yum.repos.d/
-
-RUN wget -q https://github.com/oven-sh/bun/releases/latest/download/bun-linux-x64.zip -O /tmp/bun-linux-x64.zip \
-  && unzip /tmp/bun-linux-x64.zip -d /tmp/ \
-  && mv /tmp/bun-linux-x64/bun /usr/local/bin/ \
-  && rm -rf /tmp/bun-linux-x64*
 
 RUN dnf -y upgrade \
   && dnf -y install \
