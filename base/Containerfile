@@ -10,9 +10,12 @@ RUN set -ex \
 
 COPY ./yum.repos.d/*.repo /etc/yum.repos.d/
 
+RUN echo "net.ipv4.ip_forward=1" >> /etc/sysctl.conf && \
+    echo "net.ipv6.conf.all.forwarding=1" >> /etc/sysctl.conf
+
 RUN rpm-ostree override remove firefox firefox-langpacks && \
     rpm-ostree install \
-    tailscale alacritty neovim zsh && \
+    tailscale alacritty&& \
     rpm-ostree cleanup -m && \
     ostree container commit
 
