@@ -1,7 +1,15 @@
 FROM quay.io/fedora/fedora-toolbox:41
 
-RUN dnf install zsh -y
+ARG NAME=toolbox
 
-RUN /bin/bash -c "$(curl -fsSL https://raw.githubusercontent.com/Homebrew/install/HEAD/install.sh)"
+LABEL name="$NAME" \
+      summary="Fedora toolbox container" \
+      maintainer="Joe Terlecki"
 
-ENV PATH="/home/linuxbrew/.linuxbrew/bin:${PATH}"
+ENV EDITOR=nvim
+
+# Install packages
+RUN dnf -y upgrade \
+  && dnf -y install \
+  ripgrep \
+  && dnf clean all
