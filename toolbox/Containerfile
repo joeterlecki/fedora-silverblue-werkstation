@@ -1,1 +1,7 @@
 FROM quay.io/fedora/fedora-toolbox:41
+
+RUN dnf install zsh -y
+
+RUN /bin/bash -c "$(curl -fsSL https://raw.githubusercontent.com/Homebrew/install/HEAD/install.sh)"
+
+ENV PATH="/home/linuxbrew/.linuxbrew/bin:${PATH}"
