@@ -1,1 +1,1 @@
-echo FROM quay.io/fedora/fedora-toolbox:41
+FROM quay.io/fedora/fedora-toolbox:41
