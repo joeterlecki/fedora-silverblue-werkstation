@@ -1,8 +1,10 @@
 FROM quay.io/fedora-ostree-desktops/sway-atomic:41
 
+ARG ZELLIJ_URL="https://github.com/zellij-org/zellij/releases/download/v0.42.1/zellij-x86_64-unknown-linux-musl.tar.gz"
+ARG WEZTERM_URL="https://github.com/wezterm/wezterm/releases/download/20240203-110809-5046fc22/wezterm-20240203_110809_5046fc22-1.fedora39.x86_64.rpm"
+
 RUN set -ex \
-    && ZELLIJ_LATEST=$(curl -s https://api.github.com/repos/zellij-org/zellij/releases/latest | grep "tag_name" | cut -d '"' -f 4) \
-    && wget -q "https://github.com/zellij-org/zellij/releases/download/${ZELLIJ_LATEST}/zellij-x86_64-unknown-linux-musl.tar.gz" \
+    && wget -q "${ZELLIJ_URL}" \
     && mkdir -p /tmp/zellij \
     && tar -xzf zellij-x86_64-unknown-linux-musl.tar.gz -C /tmp/zellij \
     && cp /tmp/zellij/zellij /usr/bin/ \
@@ -10,12 +12,13 @@ RUN set -ex \
 
 COPY ./yum.repos.d/*.repo /etc/yum.repos.d/
 
-RUN echo "net.ipv4.ip_forward=1" >> /etc/sysctl.conf && \
-    echo "net.ipv6.conf.all.forwarding=1" >> /etc/sysctl.conf
+RUN echo "net.ipv4.ip_forward=1" >> /etc/sysctl.conf \
+    && echo "net.ipv6.conf.all.forwarding=1" >> /etc/sysctl.conf
 
-RUN rpm-ostree override remove firefox firefox-langpacks && \
-    rpm-ostree install \
-    tailscale alacritty&& \
-    rpm-ostree cleanup -m && \
-    ostree container commit
+RUN rpm-ostree override remove firefox firefox-langpacks \
+    && rpm-ostree install \
+    tailscale \
+    ${WEZTERM_URL} \
+    && rpm-ostree cleanup -m \
+    && ostree container commit
 
