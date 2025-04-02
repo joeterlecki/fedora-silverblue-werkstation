@@ -6,6 +6,7 @@ RUN wget -q ${BUN_URL} -O ./bun-linux-x64.zip \
 
 FROM quay.io/fedora/fedora-toolbox:41 AS Release
 
+ARG YAZI_URL="https://www.rpmfind.net/linux/opensuse/tumbleweed/repo/oss/x86_64/yazi-25.3.2-1.1.x86_64.rpm"
 ARG NAME=toolbox
 
 LABEL name="$NAME" \
@@ -31,4 +32,5 @@ RUN dnf -y upgrade \
   lsd \
   zoxide \
   fzf \
+  ${YAZI_URL} \
   && dnf clean all
