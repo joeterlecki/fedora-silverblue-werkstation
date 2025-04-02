@@ -15,7 +15,7 @@ ARG WEZTERM_URL="https://github.com/wezterm/wezterm/releases/download/20240203-1
 RUN echo "net.ipv4.ip_forward=1" > /etc/sysctl.d/99-ip-forward.conf && \
     echo "net.ipv6.conf.all.forwarding=1" >> /etc/sysctl.d/99-ip-forward.conf
 
-COPY --from=zellij /zellij /usr/local/bin/
+COPY --from=zellij /zellij /usr/bin/
 COPY ./yum.repos.d/*.repo /etc/yum.repos.d/
 
 RUN rpm-ostree override remove firefox firefox-langpacks \
