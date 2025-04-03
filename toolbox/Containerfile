@@ -9,10 +9,6 @@ FROM quay.io/fedora/fedora-toolbox:41 AS Release
 ARG YAZI_URL="https://www.rpmfind.net/linux/opensuse/tumbleweed/repo/oss/x86_64/yazi-25.3.2-1.1.x86_64.rpm"
 ARG NAME=toolbox
 
-LABEL name="$NAME" \
-  summary="Fedora toolbox container" \
-  maintainer="Joe Terlecki"
-
 ENV EDITOR=nvim
 
 COPY --from=bun /bun-linux-x64/bun /usr/local/bin
@@ -34,3 +30,7 @@ RUN dnf -y upgrade \
   fzf \
   ${YAZI_URL} \
   && dnf clean all
+
+LABEL name="$NAME" \
+  summary="Fedora toolbox container" \
+  maintainer="Joe Terlecki"
