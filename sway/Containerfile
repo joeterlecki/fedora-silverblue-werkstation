@@ -16,5 +16,5 @@ RUN rpm-ostree override remove firefox firefox-langpacks \
     && ostree container commit
 
 LABEL name="$NAME" \
-    summary="Fedora Silverblue SWAY Base container" \
+    summary="Fedora Silverblue SWAY container" \
     maintainer="Joe Terlecki"

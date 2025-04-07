@@ -1,9 +1,9 @@
 ---
-name: Build Werkstation OCI Base
+name: Build Werkstation OCI Sway
 on:
   push:
     paths:
-      - 'base/**'
+      - 'sway/**'
 jobs:
   build:
     name: Build Images
@@ -15,7 +15,7 @@ jobs:
       with:
         image: werkstation
         tags: latest
-        context: ./base/
+        context: ./sway/
         layers: true
         oci: true
         containerfiles: |
