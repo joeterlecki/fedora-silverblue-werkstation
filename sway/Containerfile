@@ -7,8 +7,7 @@ RUN echo "net.ipv4.ip_forward=1" > /etc/sysctl.d/99-ip-forward.conf && \
 
 COPY ./yum.repos.d/*.repo /etc/yum.repos.d/
 
-RUN rpm-ostree override remove firefox firefox-langpacks \
-    && rpm-ostree install \
+RUN rpm-ostree install \
     tailscale \
     zsh \
     i3 \
@@ -33,10 +32,30 @@ RUN rpm-ostree override remove firefox firefox-langpacks \
     dunst \
     light \
     NetworkManager \
-    brightnessctl \
+    urxvt \
+    nmcli \
+    xbrightlight \
+    pactl \
     lightdm \
     lxappearance \
     ${WEZTERM_URL} \
+    glx-utils \
+    mesa-dri-drivers \
+    mesa-vulkan-drivers \
+    plymouth-system-theme \
+    xorg-x11-drv-amdgpu \
+    xorg-x11-drv-ati \
+    xorg-x11-drv-evdev \
+    xorg-x11-drv-intel \
+    xorg-x11-drv-libinput \
+    xorg-x11-drv-nouveau \
+    xorg-x11-drv-openchrome \
+    xorg-x11-drv-qxl \
+    xorg-x11-drv-vmware \
+    xorg-x11-drv-wacom \
+    xorg-x11-server-Xorg \
+    xorg-x11-xauth \
+    xorg-x11-xinit \
     && rpm-ostree cleanup -m \
     && ostree container commit
 
