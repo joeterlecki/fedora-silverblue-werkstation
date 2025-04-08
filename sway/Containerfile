@@ -32,10 +32,7 @@ RUN rpm-ostree install \
     dunst \
     light \
     NetworkManager \
-    urxvt \
-    nmcli \
-    xbrightlight \
-    pactl \
+    brightnessctl \
     lightdm \
     lxappearance \
     ${WEZTERM_URL} \
