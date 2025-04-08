@@ -13,6 +13,16 @@ RUN rpm-ostree override remove firefox firefox-langpacks \
     zsh \
     i3 \
     i3lock \
+    i3status \
+    lightdm \
+    lightdm-greeter \
+    lightdm-gtk-greeter-settings \
+    network-manager-applet \
+    pavucontrol \
+    pulseaudio-utils \
+    volumeicon \
+    azote \
+    firefox \
     thunar \
     dmenu \
     polybar \
@@ -21,6 +31,10 @@ RUN rpm-ostree override remove firefox firefox-langpacks \
     mousepad \
     htop \
     dunst \
+    light \
+    NetworkManager \
+    brightnessctl \
+    lightdm \
     lxappearance \
     ${WEZTERM_URL} \
     && rpm-ostree cleanup -m \
