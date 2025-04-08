@@ -21,7 +21,7 @@ RUN rpm-ostree override remove firefox firefox-langpacks \
     mousepad \
     htop \
     dunst \
-    lx-appearence \
+    lxappearance \
     ${WEZTERM_URL} \
     && rpm-ostree cleanup -m \
     && ostree container commit
