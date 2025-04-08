@@ -1,4 +1,4 @@
-FROM quay.io/fedora-ostree-desktops/sway-atomic:41 as release
+FROM quay.io/fedora-ostree-desktops/base-atomic:41 as release
 
 ARG WEZTERM_URL="https://github.com/wezterm/wezterm/releases/download/20240203-110809-5046fc22/wezterm-20240203_110809_5046fc22-1.fedora39.x86_64.rpm"
 
@@ -11,6 +11,17 @@ RUN rpm-ostree override remove firefox firefox-langpacks \
     && rpm-ostree install \
     tailscale \
     zsh \
+    i3 \
+    i3lock \
+    thunar \
+    dmenu \
+    polybar \
+    rofi \
+    feh \
+    mousepad \
+    htop \
+    dunst \
+    lx-appearence \
     ${WEZTERM_URL} \
     && rpm-ostree cleanup -m \
     && ostree container commit

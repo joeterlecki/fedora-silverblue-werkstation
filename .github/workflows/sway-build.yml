@@ -19,7 +19,7 @@ jobs:
         layers: true
         oci: true
         containerfiles: |
-          ./base/Containerfile
+          ./sway/Containerfile
     - name: 'Login to GitHub Container Registry'
       uses: docker/login-action@v2
       with:
